@@ -3,6 +3,7 @@ import sys
 import os
 import argparse
 
+"""This script was for sorting the phylip file by taxon developed by Ryan Culligan"""
 
 parser = argparse.ArgumentParser()
 
