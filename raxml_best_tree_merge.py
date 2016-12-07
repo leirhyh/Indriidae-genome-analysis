@@ -2,6 +2,8 @@
 import argparse
 import os
 
+"""This script was for merging raxml trees developed by Ryan Culligan and slightly modified"""
+
 parser = argparse.ArgumentParser(description='')
 parser.add_argument('-input_path', action="store", dest="input_path", required=True)
 parser.add_argument('-output_path', action="store", dest="output_path",required=True)
