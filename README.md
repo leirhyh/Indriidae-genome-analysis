@@ -1,6 +1,6 @@
 #Indriidae genome analysis
 
-##1. Trimming the raw trees with [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic)
+##1. Trimming the raw trees with [Trimmomatic-v0.36](http://www.usadellab.org/cms/?page=trimmomatic)
 ```bash
 java -jar trimmomatic-0.36.jar PE\
 	-phred33\  
@@ -61,7 +61,7 @@ python parallel\_process\_run\_rxml.py -input_path genefolder\
 	-output genetreefolder -c 32\  
 ```
 
-##6. Running species tree for all the genes with [ASTRAL](https://github.com/smirarab/ASTRAL)
+##6. Running species tree for all the genes with [ASTRAL-v4.10.11](https://github.com/smirarab/ASTRAL)
 ```bash
  java -jar astral.4.8.o.jar -i combinedtree.tre\
 	-a map.txt -o combinedtreeastra.tre\
@@ -91,7 +91,7 @@ python generandomselect.py -input\_path totalgenefile\
 * As described in Step 6
 * [MP-EST online version](http://bioinformatics.publichealth.uga.edu/SpeciesTreeAnalysis/index.php) 
 
-##8. Comparing the above species trees by RF distance in [R3.2.3](https://www.r-project.org/) and select gene  set presenting the whole data set for following analyses
+##8. Comparing the above species trees by RF distance in [R-v3.2.3](https://www.r-project.org/) and select gene  set presenting the whole data set for following analyses
 
 * setwd("C:\\Users\\Documents\\Genomic sequence sequencing")  
 
@@ -105,7 +105,7 @@ python generandomselect.py -input\_path totalgenefile\
 
 * RF.dist(tree1,tree2)  
 
-##9. Data partition for the selected gene set by kmeans in [Partitionfiner 2.0](https://github.com/brettc/partitionfinder/releases)
+##9. Data partition for the selected gene set by kmeans in [Partitionfiner-v2.0](https://github.com/brettc/partitionfinder/releases)
 ```bash
 docker pull theculliganman/partitionfinder
 docker run -itv /partitiontest:/partitionfinder_data\ 
@@ -114,12 +114,12 @@ docker run -itv /partitiontest:/partitionfinder_data\
 python /partitionfinder/PartitionFinder.py\ 
 	/partitionfinder_data/indripartition.phy
 ```
-##10. Running [MrBayes v3.2.5](http://mrbayes.sourceforge.net/) with data partition from step 9.
+##10. Running [MrBayes-v3.2.5](http://mrbayes.sourceforge.net/) with data partition from step 9.
 ```bash
 mpirun -np 8 mb genefile.nex
 ```
 
-##11. Running [BEASTv1.8.2](http://beast.bio.ed.ac.uk/downloads) with data partition from step 9 with the selected clock model.
+##11. Running [BEAST-v1.8.2](http://beast.bio.ed.ac.uk/downloads) with data partition from step 9 with the selected clock model.
 ```bash
 java -jar beast.jar beagle bealge_cpu genefile.xml
 ```
