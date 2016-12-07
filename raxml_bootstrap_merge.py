@@ -4,7 +4,7 @@ import os
 import shutil
 
 """this python script to pull all the bootstrap files to one
- folder for Astral species tree bootstrap, developed with Ryan Culligan and modified from the raxml_best_tree_merge.py"""
+ folder for Astral species tree bootstrap,  modified from the raxml_best_tree_merge.py"""
 
 parser = argparse.ArgumentParser(description='')   # standard input and output format using argparse
 parser.add_argument('-input_path', action="store", dest="input_path", required=True)
