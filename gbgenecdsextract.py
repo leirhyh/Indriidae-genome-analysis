@@ -6,7 +6,7 @@ from Bio.Seq import Seq
 from Bio.SeqRecord import SeqRecord
 from pyfaidx import Fasta, wrap_sequence
 
-'''This function is to extract CDS from the Genbank file'''
+'''This function is to extract CDS from the Genbank file, developed with Ryan Culligan'''
 def extractCDS(input_path, output_path):
 	
 	input_pathname = os.path.abspath(input_path)
