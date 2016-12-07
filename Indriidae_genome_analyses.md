@@ -10,7 +10,7 @@ java -jar trimmomatic-0.36.jar PE\
 	ILLUMINACLIP:adapters/TruSeq3-PE.fa:2:30:10\  
 	LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:36\  
 ```
-##2. Extracting CDS from Genbank with the python script--[gbgenecdsextract.py]() and select 1400 CDS.
+##2. Extracting CDS from Genbank with the python script--[gbgenecdsextract.py](https://github.com/leirhyh/Indriidae-genome-analysis/blob/master/gbgenecdsextract.py) and select 1400 CDS.
 ```bash 
 python gbgenecdsextract.py -input\_path sifakamRNA -output\_path geneselected
 ```
