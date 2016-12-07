@@ -9,6 +9,9 @@ import time
 import threading
 from collections import deque
 
+"""This script was for parallel running raxml of the phylip files by taxon developed by Ryan Culligan"""
+
+
 try:
     import Queue
 except ImportError:
