@@ -35,7 +35,7 @@ python ordered_phy_sortindriidae.py \
 	-input_path $STARTING_PHY_DIR \
 	-output_path $SORTED_PHY_DIR
 ```
-* convert phylip-relaxed file to standard phylip file byphyluce_align_convert_one_align_to_another 
+* convert phylip-relaxed file to standard phylip file by [phyluce_align_convert_one_align_to_another] (https://github.com/faircloth-lab/phyluce/blob/master/bin/align/phyluce_align_get_informative_sites)
 ```bash
 python /home/genetics/anaconda2/pkgs/phyluce-1.5.0-py27_0/bin/phyluce_align_convert_one_align_to_another \
 	--alignments $SORTED_PHY_DIR \
@@ -43,7 +43,7 @@ python /home/genetics/anaconda2/pkgs/phyluce-1.5.0-py27_0/bin/phyluce_align_conv
 	--input-format phylip-relaxed \
 	--output-format phylip
 ```
-* select phylip files based on missing data by phyluce_align_get_informative_sites_reworked_ryan.py*
+* select phylip files based on missing data by [phyluce_align_get_informative_sites_reworked_ryan.py](https://github.com/TheCulliganMan/phyluce/blob/master/bin/align/phyluce_align_get_informative_sites_reworked_ryan.py)
 ```bash
  python phyluce\_align\_get\_informative\_sites\_reworked\_ryan \
 	--input $FORMAL_PHY_DIR \
