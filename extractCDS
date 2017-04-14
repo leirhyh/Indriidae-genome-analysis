@@ -17,28 +17,29 @@ def extractCDS(input_path, output_path):
 			os.makedirs(output_path)
 		records = list(SeqIO.parse(input_handle, "fasta"))
 		genelist = []
-
+		count = 0
 		
 		for record in records:
 			line = str(record.description)
+			
 			# from fasta file, the gene info is in description, following is extract gene name
 			if 'gene=' in line:
 				geneName = line.split('gene=')[1].split(']')[0]
-			if '_' in line:
-				num = line.split('_')[5].split('[gene=')[0]
-				
-			geneID = geneName + '_' + num # make the geneID
 			
-			if geneID not in genelist:
-				newseq = '>' + geneID + '\n' + record.seq # make the seq for write
-				genelist.append(geneID)
-			gene_file_name = geneID[:-1] + '.fa'
+			if geneName not in genelist:
+				newseq = '>' + geneName + '\n' + record.seq # make the seq for write
+				genelist.append(geneName)
+			else:
+				count = count + 1
+				num = str(count)
+				geneName = geneName + '_' + num
+			gene_file_name = geneName + '.fa'
 			# make the path for write the sequence
 			out_path = os.path.abspath(output_path)
 			gene_file_path = os.path.join(out_path, gene_file_name)
 			# write the sequence to output
 			with open(gene_file_path, "w+") as output_handle:
-				output_handle.write(">{}\n{}\n".format(geneID, newseq))
+				output_handle.write(">{}\n{}\n".format(geneName, newseq))
 		
 
 def main():
