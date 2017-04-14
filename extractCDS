@@ -8,13 +8,13 @@ from Bio.SeqRecord import SeqRecord
 
 
 '''This function is to extract CDS from the Genbank file'''
-def extractCDS(input_path, output_path):
-	in_path = os.path.abspath(input_path)
+def extractCDS(input, output):
+	in_path = os.path.abspath(input)
 	
 	with open(in_path) as input_handle:
 		# if output path doesn't exist, make a new folder
-		if not os.path.isdir(output_path): 
-			os.makedirs(output_path)
+		if not os.path.isdir(output): 
+			os.makedirs(output)
 		records = list(SeqIO.parse(input_handle, "fasta"))
 		genelist = []
 		count = 0
@@ -35,8 +35,8 @@ def extractCDS(input_path, output_path):
 				geneName = geneName + '_' + num
 			gene_file_name = geneName + '.fa'
 			# make the path for write the sequence
-			out_path = os.path.abspath(output_path)
-			gene_file_path = os.path.join(out_path, gene_file_name)
+			out_path = os.path.abspath(output)
+			gene_file_path = os.path.join(out, gene_file_name)
 			# write the sequence to output
 			with open(gene_file_path, "w+") as output_handle:
 				output_handle.write(">{}\n{}\n".format(geneName, newseq))
@@ -45,13 +45,13 @@ def extractCDS(input_path, output_path):
 def main():
 	#define the input path and output path
 	parser = argparse.ArgumentParser()
-	parser.add_argument("-input_path", help="input directory path", required=True)
-	parser.add_argument("-output_path", help="output directory path", required=True)
+	parser.add_argument("-input", help="input directory path", required=True)
+	parser.add_argument("-output", help="output directory path", required=True)
 	args = parser.parse_args()
-	input_path = args.input_path
-	output_path = args.output_path
+	input = args.input
+	output = args.output
 
-	extractCDS(input_path, output_path) # calling the function of extractCDS
+	extractCDS(input, output) # calling the function of extractCDS
 
 if __name__ == "__main__":
 	main()
