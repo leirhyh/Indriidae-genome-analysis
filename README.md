@@ -105,14 +105,31 @@ python generandomselect.py -input\_path totalgenefile\
 
 * RF.dist(tree1,tree2)  
 
-##9. Data partition for the selected gene set by kmeans in [Partitionfiner-v2.0](https://github.com/brettc/partitionfinder/releases)
+##9. Data partition for the selected gene set by CloudForest(https://github.com/laninsky/UCE_processing_step)
 ```bash
-docker pull theculliganman/partitionfinder
-docker run -itv /partitiontest:/partitionfinder_data\ 
-	theculliganman/partitionfinder /bin/bash\
+#step1 find the best model for each gene by phyml
+python2 /home/genetics/ryan/cloudforest_indriidae_phylip/CloudForest/cloudforest/cloudforest_mpi.py 250geneset cloudforest_genetrees genetrees  /home/genetics/ryan/cloudforest_indriidae_phylip/CloudForest/cloudforest/binaries/PhyML3linux64 --cores 30 --parallelism multiprocessing | tee cloudforest.log
 
-python /partitionfinder/PartitionFinder.py\ 
-	/partitionfinder_data/indripartition.phy
+#step2 output the list of best model for each gene
+phyluce_genetrees_split_models_from_genetrees --genetrees genetrees.tre --output output_models.txt
+
+#step3 R scripts for concatenating together loci with the same substitution model. Make sure you have the two cloudforestconcat Rscripts in the clouldforest_phylip directory 
+cd ../cloudforest_phylip
+cp ../cloudforest_genetrees/output_models.txt output_models.txt
+Rscript ../cloudforest_genetrees/cloudforestconcat1.R
+rename 's/.phy$/.phylip/' *.phy
+bash concat_by_model.sh
+Rscript ../cloudforest_genetrees/cloudforestconcat2.R 
+
+#step4 make mrbayes partion file.
+mkdir nexus
+for I in *.nexus/; do cp $I*.nexus ./nexus; done # pull all nexus files
+phyluce_align_format_nexus_files_for_mrbayes \
+    --alignments nexus/ \
+    --models output_models.txt \
+    --output 250partion.nexus \
+    --interleave \
+    --unlink
 ```
 ##10. Running [MrBayes-v3.2.5](http://mrbayes.sourceforge.net/) with data partition from step 9.
 ```bash
