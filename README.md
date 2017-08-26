@@ -1,4 +1,4 @@
-#Indriidae genome analysis
+# Indriidae genome analysis
 
 ##1. Trimming the raw trees with [Trimmomatic-v0.36](http://www.usadellab.org/cms/?page=trimmomatic)
 ```bash
